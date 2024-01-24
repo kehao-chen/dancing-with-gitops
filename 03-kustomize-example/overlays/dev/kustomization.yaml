@@ -1,6 +1,18 @@
----
-bases:
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
   - ../../base
-patchesStrategicMerge:
-  - configMap.yaml
-  - ingress.yaml
+patches:
+  - path: configMap.yaml
+  - patch: |
+      - op: replace
+        path: /spec/rules/0/host
+        value: example-app.do-dev.happyhacking.ninja
+      - op: replace
+        path: /spec/tls/0/hosts/0
+        value: example-app.do-dev.happyhacking.ninja
+    target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: example-app-ingress

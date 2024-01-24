@@ -9,11 +9,12 @@
 ## Prerequisites
 
 - Terraform: [Install | Terraform | HashiCorp Developer](https://developer.hashicorp.com/terraform/install)
-- Kubectl:
+- Kubectl
+- Helm
 
 ## Setup
 
-### Create Kubernetes Clusters
+### 01. Create Kubernetes Clusters
 
 ```shell
 cd ./01-terraform
@@ -21,14 +22,14 @@ terraform init
 terraform apply
 ```
 
-### Install ArgoCD
+### 02. Install ArgoCD
 
 ```shell
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/core-install.yaml
 ```
 
-### Install Nginx Ingress Controller
+#### Install Nginx Ingress Controller
 
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.5/deploy/static/provider/do/deploy.yaml
@@ -36,4 +37,12 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 ```shell
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.3/cert-manager.yaml
+```
+
+#### Install Reloader
+
+```shell
+helm repo add stakater https://stakater.github.io/stakater-charts
+helm repo update
+helm install stakater/reloader # For helm3 add --generate-name flag or set the release name
 ```

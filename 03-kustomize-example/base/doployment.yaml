@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-app
+  namespace: default
+  labels:
+    app: example-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-app
+  template:
+    metadata:
+      labels:
+        app: example-app
+    spec:
+      containers:
+        - name: server
+          image: docker.io/library/nginx:1.25
+          volumeMounts:
+            - name: example-app
+              mountPath: /usr/share/nginx/html
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: "128M"
+            limits:
+              cpu: 100m
+              memory: "256M"
+          env:
+            - name: LOG_LEVEL
+              value: "DEBUG"
+      volumes:
+        - name: example-app
+          configMap:
+            name: example-app
+            items:
+              - key: body
+                path: index.html

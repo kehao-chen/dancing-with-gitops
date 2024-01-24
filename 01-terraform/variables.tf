@@ -3,14 +3,14 @@ variable "do_token" {
   type        = string
 }
 
-variable "do_kubeconfig_file_path" {
-  description = "Path to DigitalOcean kubeconfig file"
+variable "do_kubeconfig_file_path_dev" {
+  description = "Path to DigitalOcean kubeconfig file for Dev environment"
   type        = string
-  default     = "~/.kube/do-kubeconfig"
+  default     = "~/.kube/do_kubeconfig_dev"
 }
 
-variable "aws_kubeconfig_file_path" {
-    description = "Path to AWS kubeconfig file"
+variable "do_kubeconfig_file_path_prod" {
+    description = "Path to AWS kubeconfig file for Prod environment"
     type        = string
-    default     = "~/.kube/aws-kubeconfig"
+    default     = "~/.kube/do_kubeconfig_prod"
 }

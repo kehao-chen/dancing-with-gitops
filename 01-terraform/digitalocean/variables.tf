@@ -12,7 +12,7 @@ variable "region" {
 variable "k8s_version" {
   description = "Kubernetes version"
   type        = string
-  default     = "1.28.2-do.0"
+  default     = "1.29.0-do.0"
 }
 
 variable "k8s_cluster_name" {
@@ -30,7 +30,7 @@ variable "k8s_node_pool_name" {
 variable "k8s_node_size" {
   description = "Droplet node size"
   type        = string
-  default     = "s-1vcpu-2gb"
+  default     = "s-2vcpu-4gb"
 }
 
 variable "k8s_node_count" {
